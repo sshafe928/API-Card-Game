@@ -26,10 +26,10 @@ const {
       // console.log('Reshuffled Deck:', reshuffledDeck);
   
       // Uncomment to split the deck for two players in War
-    //   const blackjackDeck = await createBlackjackDeck();
-    //   const warPlayers = await splitDeckForWar(blackjackDeck.deck_id);
-    //   console.log('Player 1 Cards:', warPlayers.player1);
-    //   console.log('Player 2 Cards:', warPlayers.player2);
+      const blackjackDeck = await createBlackjackDeck();
+      const warPlayers = await splitDeckForWar(blackjackDeck.deck_id);
+      console.log('Player 1 Cards:', warPlayers.player1);
+      console.log('Player 2 Cards:', warPlayers.player2);
   
     } catch (error) {
       console.error('Error in Deck API calls:', error);
