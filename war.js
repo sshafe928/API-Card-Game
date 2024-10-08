@@ -2,8 +2,10 @@ const deckService = require('./deckOfCardsService');
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const handleWar = (player1, player2) => {
+const handleWar = (player1, player2, extracard1, extracard2) => {
     const pot = []; 
+
+    pot.push(extracard1, extracard2)
 
     // Check if both players have enough cards for war
     if (player1.length < 3 || player2.length < 3) {
@@ -87,7 +89,7 @@ const playWar = async () => {
             } else {
                 console.log("It's a tie! War time...");
                 // War logic 
-                handleWar(player1, player2)
+                handleWar(player1, player2, card1, card2)
             }
 
             console.log(`Cards left - Player 1: ${player1.length}, Player 2: ${player2.length}`);
