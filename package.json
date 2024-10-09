@@ -4,12 +4,16 @@
   "description": "This contains the following card games: Black jack and War",
   "main": "index.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "dev": "nodemon"
   },
   "keywords": [],
   "author": "Lucas Saner <lsaner720@west-mec.org>",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Blackjack</h1>
+    <div id="game-container">
+        <div id="player-hand"></div>
+        <div id="dealer-hand"></div>
+        <div id="game-message"></div>
+        <button id="hit-button">Hit</button>
+        <button id="stand-button">Stand</button>
+    </div>
+</body>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+const socket = io();
+
+// ... (Rest of your JavaScript code)
+
+// Update the game state using EJS
+function updateGameState(gameState) {
+    const playerHandDiv = document.getElementById('player-hand');
+    const dealerHandDiv = document.getElementById('dealer-hand');
+    const gameMessageDiv = document.getElementById('game-message');
+
+    // Render player hand using EJS
+    playerHandDiv.innerHTML = `
+        <% playerHand.forEach(card => { %>
+            <img src="<%= card.image %>" alt="<%= card.value %>">
+        <% }); %>
+    `;
+
+    // Render dealer hand (show only one card initially)
+    dealerHandDiv.innerHTML = `
+        <% dealerHand.slice(0, 1).forEach(card => { %>
+            <img src="<%= card.image %>" alt="<%= card.value %>">
+        <% }); %>
+    `;
+
+    // Update game message
+    gameMessageDiv.textContent = gameState.message;
+}
+<script src="script.js"></script>
+</html>
