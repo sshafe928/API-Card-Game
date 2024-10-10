@@ -1,37 +1,35 @@
-// app.js
+const express = require('express');
+const path = require('path');
+const app = express();
 const {
-    shuffleDeck,
-    drawCards,
-    reshuffleDeck,
-    createBlackjackDeck,
-    splitDeckForWar,
-  } = require('./deckOfCardsService');
-  
-  (async () => {
-    try {
-      // Uncomment to create a big deck for Blackjack
-      // const blackjackDeck = await createBlackjackDeck();
-      // console.log('Blackjack Deck:', blackjackDeck);
-  
-      // Uncomment to shuffle a new deck
-      // const newDeck = await shuffleDeck(1);
-      // console.log('New Deck:', newDeck);
-  
-      // Uncomment to draw cards from a deck
-      // const drawnCards = await drawCards('deck_id_here', 5); // Replace with a valid deck_id
-      // console.log('Drawn Cards:', drawnCards);
-  
-      // Uncomment to reshuffle an existing deck
-      // const reshuffledDeck = await reshuffleDeck('deck_id_here'); // Replace with a valid deck_id
-      // console.log('Reshuffled Deck:', reshuffledDeck);
-  
-      // Uncomment to split the deck for two players in War
-      const blackjackDeck = await createBlackjackDeck();
-      const warPlayers = await splitDeckForWar(blackjackDeck.deck_id);
-      console.log('Player 1 Cards:', warPlayers.player1);
-      console.log('Player 2 Cards:', warPlayers.player2);
-  
-    } catch (error) {
-      console.error('Error in Deck API calls:', error);
-    }
-  })();
+  shuffleDeck,
+  drawCards,
+  reshuffleDeck,
+  createBlackjackDeck,
+  splitDeckForWar,
+} = require('./deckOfCardsService');
+
+
+
+// Set up the view engine to use EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));  // Set views folder
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route for Blackjack page
+app.get('/blackjack', (req, res) => {
+   res.render('blackJack');  // Renders blackJack.ejs
+});
+
+// Route for War page
+app.get('/war', (req, res) => {
+   res.render('war');  // Renders war.ejs
+});
+
+// Start the server
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+   console.log(`Server is running on http://localhost:${port}`);
+});
