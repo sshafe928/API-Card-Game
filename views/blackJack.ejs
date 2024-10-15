@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
-    <link rel="stylesheet" href="./public/blackJack.css"> <!-- External CSS for styling -->
+    <link rel="stylesheet" href="/blackJack.css"> <!-- Note: No 'public/' in the path -->
 </head>
 <body>
     <div class="game-container">
@@ -32,19 +32,35 @@
             <div class="dealer-cards">
                 <% dealerHand.forEach((card, index) => { %>
                     <div class="card">
-                        <p><%= index === 0 ? `${card.value} of ${card.suit}` : 'Hidden' %></p>
+                        <p>
+                            <%= (index === 0 || showDealerHand) 
+                                ? `${card.value} of ${card.suit}` 
+                                : 'Hidden' %>
+                        </p>
                     </div>
                 <% }); %>
             </div>
             <p><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
+            <% if (showDealerHand) { %>
+                <p><strong>Dealer's Score:</strong> <%= dealerScore %></p>
+            <% } %>
         </div>
 
-        <div class="controls">
-            <form action="/play" method="post">
-                <button type="submit" name="action" value="hit">Hit</button>
-                <button type="submit" name="action" value="stand">Stand</button>
-            </form>
-        </div>
+        <% if (gameOver) { %> <!-- Check if the game is over -->
+            <div class="game-over">
+                <h2><%= gameResult %></h2> <!-- Display win/lose message -->
+                <form action="/blackjack/reset" method="post"> <!-- Reset game -->
+                    <button type="submit">Play Again</button>
+                </form>
+            </div>
+        <% } else { %> <!-- If the game is still ongoing -->
+            <div class="controls">
+                <form action="/blackjack" method="post">
+                    <button type="submit" name="action" value="hit">Hit</button>
+                    <button type="submit" name="action" value="stand">Stand</button>
+                </form>
+            </div>
+        <% } %>
     </div>
 </body>
 </html>

@@ -20,19 +20,29 @@ let playerHand = [];
 let dealerHand = [];
 let wins = 0;
 let losses = 0;
+let showDealerHand = false; // Used to toggle visibility of dealer's cards
 
-// Route for the Blackjack page
+let gameOver = false; // Track if the game is over
+let gameResult = "";  // Store result message ("You win!", "Dealer wins!", etc.)
+
+// Route for the Blackjack page (GET request to start or reset the game)
 app.get('/blackjack', async (req, res) => {
 try {
    if (!blackjackDeck) {
    blackjackDeck = await createBlackjackDeck();
    }
 
-   playerHand = await drawCards(blackjackDeck.deck_id, 2);  // Draw 2 cards for player
-   dealerHand = await drawCards(blackjackDeck.deck_id, 1);  // Draw 1 card for dealer
+   // Initial draw: 2 cards for player, 1 for dealer
+   playerHand = await drawCards(blackjackDeck.deck_id, 2);
+   dealerHand = await drawCards(blackjackDeck.deck_id, 1);
 
    const playerScore = calculateHandValue(playerHand);
    const dealerScore = calculateHandValue(dealerHand);
+
+   // Reset flags
+   showDealerHand = false;
+   gameOver = false;
+   gameResult = "";
 
    res.render('blackJack', {
    playerHand,
@@ -40,7 +50,10 @@ try {
    playerScore,
    dealerScore,
    wins,
-   losses
+   losses,
+   showDealerHand,
+   gameOver,
+   gameResult
    });
 } catch (error) {
    console.error('Error starting Blackjack game:', error);
@@ -49,45 +62,100 @@ try {
 });
 
 // Handle form actions for hitting or standing
-app.post('/play', async (req, res) => {
+app.post('/blackjack', async (req, res) => {
 const action = req.body.action;
 
+// Calculate player and dealer scores
+const playerScore = calculateHandValue(playerHand);
+let dealerScore = calculateHandValue(dealerHand);
+
+if (gameOver) {
+   // If the game is over, don't allow further actions
+   return res.redirect('/blackjack');
+}
+
 if (action === 'hit') {
+   // Player hits (draw a new card)
    try {
    const newCard = await drawCards(blackjackDeck.deck_id, 1);
-   playerHand.push(newCard[0]);
-   const playerScore = calculateHandValue(playerHand);
-   
-   if (playerScore > 21) {
+   playerHand.push(newCard[0]); // Add new card to player's hand
+
+   const updatedPlayerScore = calculateHandValue(playerHand);
+
+   // Check if the player busts (goes over 21)
+   if (updatedPlayerScore > 21) {
       losses++;
-      res.render('blackJack', { playerHand, dealerHand, playerScore, dealerScore: calculateHandValue(dealerHand), wins, losses });
-   } else {
-      res.render('blackJack', { playerHand, dealerHand, playerScore, dealerScore: calculateHandValue(dealerHand), wins, losses });
+      gameOver = true;
+      showDealerHand = true; // Reveal dealer's hand
+      gameResult = "You lost! Dealer wins!";
    }
+
+   res.render('blackJack', {
+      playerHand,
+      dealerHand,
+      playerScore: updatedPlayerScore,
+      dealerScore,
+      wins,
+      losses,
+      showDealerHand,
+      gameOver,
+      gameResult
+   });
+
    } catch (error) {
    console.error('Error drawing card:', error);
    res.status(500).send('Error drawing card. Please try again later.');
    }
+
 } else if (action === 'stand') {
-   const dealerScore = calculateHandValue(dealerHand);
-   
-   // Simple dealer logic, drawing cards if under 17
+   // Player stands, reveal dealer's cards and finalize game
+   showDealerHand = true;
+
+   // Dealer must draw if their score is less than 17
    while (dealerScore < 17) {
    const newCard = await drawCards(blackjackDeck.deck_id, 1);
    dealerHand.push(newCard[0]);
+   dealerScore = calculateHandValue(dealerHand);
    }
 
-   // Determine winner and update wins/losses
-   const playerScore = calculateHandValue(playerHand);
-   const finalDealerScore = calculateHandValue(dealerHand);
-
-   if (finalDealerScore > 21 || playerScore > finalDealerScore) {
+   // Determine the winner
+   if (dealerScore > 21 || playerScore > dealerScore) {
    wins++;
-   } else if (finalDealerScore >= playerScore) {
+   gameResult = "You win!";
+   } else {
    losses++;
+   gameResult = "Dealer wins!";
    }
 
-   res.render('blackJack', { playerHand, dealerHand, playerScore, dealerScore: finalDealerScore, wins, losses });
+   gameOver = true;
+
+   res.render('blackJack', {
+   playerHand,
+   dealerHand,
+   playerScore,
+   dealerScore,
+   wins,
+   losses,
+   showDealerHand,
+   gameOver,
+   gameResult
+   });
+}
+});
+
+// Reset game route
+app.post('/blackjack/reset', async (req, res) => {
+try {
+   blackjackDeck = await createBlackjackDeck(); // Create a new deck for the new game
+   playerHand = [];
+   dealerHand = [];
+   gameOver = false;
+   gameResult = "";
+
+   res.redirect('/blackjack'); // Restart the game
+} catch (error) {
+   console.error('Error resetting game:', error);
+   res.status(500).send('Error resetting game. Please try again later.');
 }
 });
 
