@@ -3,48 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blackjack</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Assuming you have a styles.css file in public -->
+    <title>Blackjack Game</title>
+    <link rel="stylesheet" href="./public/blackJack.css"> <!-- External CSS for styling -->
 </head>
 <body>
     <div class="game-container">
-        <h1>Blackjack</h1>
+        <h1>Blackjack Game</h1>
         
         <div class="game-status">
-            <h2><%= message %></h2>
+            <p><strong>Wins:</strong> <%= wins %></p>
+            <p><strong>Losses:</strong> <%= losses %></p>
+        </div>
 
-            <div class="hand player-hand">
-                <h3>Your Cards:</h3>
-                <ul>
-                    <% playerHand.forEach(card => { %>
-                        <li><%= card.value %> of <%= card.suit %></li>
-                    <% }); %>
-                </ul>
-                <p>Your Score: <%= playerScore %></p>
+        <div class="cards-section">
+            <h2>Your Hand</h2>
+            <div class="player-cards">
+                <% playerHand.forEach(card => { %>
+                    <div class="card">
+                        <p><%= card.value %> of <%= card.suit %></p>
+                    </div>
+                <% }); %>
             </div>
+            <p><strong>Your Score:</strong> <%= playerScore %></p>
+        </div>
 
-            <div class="hand dealer-hand">
-                <h3>Dealer's Cards:</h3>
-                <ul>
-                    <% dealerHand.forEach(card => { %>
-                        <li><%= card.value %> of <%= card.suit %></li>
-                    <% }); %>
-                </ul>
-                <p>Dealer's Score: <%= dealerScore %></p>
+        <div class="cards-section">
+            <h2>Dealer's Hand</h2>
+            <div class="dealer-cards">
+                <% dealerHand.forEach((card, index) => { %>
+                    <div class="card">
+                        <p><%= index === 0 ? `${card.value} of ${card.suit}` : 'Hidden' %></p>
+                    </div>
+                <% }); %>
             </div>
+            <p><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
+        </div>
 
-            <% if (!gameOver) { %>
-                <form action="/hit" method="POST">
-                    <button type="submit">Hit</button>
-                </form>
-                <form action="/stand" method="POST">
-                    <button type="submit">Stand</button>
-                </form>
-            <% } else { %>
-                <form action="/" method="GET">
-                    <button type="submit">Play Again</button>
-                </form>
-            <% } %>
+        <div class="controls">
+            <form action="/play" method="post">
+                <button type="submit" name="action" value="hit">Hit</button>
+                <button type="submit" name="action" value="stand">Stand</button>
+            </form>
         </div>
     </div>
 </body>

@@ -18,6 +18,9 @@ const CARD_VALUES = {
     'ACE': 11, // Ace can be 1 or 11
 };
 
+let wins = 0;
+let losses = 0;
+
 function calculateHandValue(hand) {
     let total = 0;
     let aceCount = 0;
@@ -40,9 +43,7 @@ function calculateHandValue(hand) {
 }
 
 function playBlackjack() {
-    // Create a shuffled deck for Blackjack (using 6 decks)
     shuffleDeck(6).then((blackjackDeck) => {
-        // Deal two cards to the player and one to the dealer
         drawCards(blackjackDeck.deck_id, 2).then((playerHand) => {
             drawCards(blackjackDeck.deck_id, 1).then((dealerHand) => {
                 console.log('Your cards:', playerHand.map(card => `${card.value} of ${card.suit}`));
@@ -68,7 +69,13 @@ function playBlackjack() {
 
                         if (playerScore > 21) {
                             console.log('You BUSTED! You lose.');
-                            rl.close();
+                            losses++;
+                            if (losses >= 3) {
+                                console.log('You lost three times. Game over.');
+                                rl.close();
+                            } else {
+                                playAgainPrompt();
+                            }
                         } else {
                             promptPlayer();
                         }
@@ -82,7 +89,6 @@ function playBlackjack() {
                     console.log('You chose to stand.');
                     console.log('Dealer reveals their hidden card:', `${dealerHand[0].value} of ${dealerHand[0].suit}`);
                     
-                    // Dealer draws until reaching at least 17
                     const dealerTurn = () => {
                         dealerScore = calculateHandValue(dealerHand);
                         console.log('Dealer\'s current score:', dealerScore);
@@ -96,7 +102,8 @@ function playBlackjack() {
 
                                 if (dealerScore > 21) {
                                     console.log('Dealer BUSTS! You win!');
-                                    rl.close();
+                                    wins++;
+                                    playAgainPrompt();
                                 } else if (dealerScore < 17) {
                                     dealerTurn();
                                 } else {
@@ -121,15 +128,23 @@ function playBlackjack() {
 
                     if (dealerScore > 21) {
                         console.log('Dealer BUSTS! You win!');
+                        wins++;
                     } else if (playerScore > dealerScore) {
                         console.log('You win!');
+                        wins++;
                     } else if (playerScore === dealerScore) {
                         console.log('Push (tie).');
                     } else {
                         console.log('You lose.');
+                        losses++;
                     }
 
-                    rl.close();
+                    if (losses >= 3) {
+                        console.log('You lost three times. Game over.');
+                        rl.close();
+                    } else {
+                        playAgainPrompt();
+                    }
                 }
 
                 function promptPlayer() {
@@ -142,6 +157,19 @@ function playBlackjack() {
                         } else {
                             console.log('Invalid choice. Please enter "h" to Hit or "s" to Stand.');
                             promptPlayer();
+                        }
+                    });
+                }
+
+                // Prompt to ask if player wants to play again
+                function playAgainPrompt() {
+                    rl.question(`Do you want to play again? (y/n) Wins: ${wins}, Losses: ${losses} `, (answer) => {
+                        if (answer.trim().toLowerCase() === 'y') {
+                            rl.close();
+                            playBlackjack(); // Restart the game
+                        } else {
+                            console.log('Thanks for playing!');
+                            rl.close(); // Exit the game
                         }
                     });
                 }
