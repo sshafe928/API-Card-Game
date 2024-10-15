@@ -1,40 +1,119 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #228B22;
-    color: white;
+    background-color: #2e2e2e; /* Dark background */
+    font-family: 'Arial', sans-serif; /* Font family */
+    color: #fff; /* Text color */
+}
+
+/* Game Container */
+.game-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #444; /* Slightly lighter background */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     text-align: center;
 }
 
-.game-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #333;
-    border-radius: 10px;
+/* Headings */
+h1 {
+    font-size: 2.5em;
+    color: #FFA500; /* Orange for Halloween */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
+h2 {
+    font-size: 2em;
+    color: #FF6347; /* Tomato color */
+    margin-bottom: 10px;
+}
+
+/* Game Status */
+.game-status {
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+
+/* Cards Section */
 .cards-section {
     margin: 20px 0;
 }
 
+/* Player and Dealer Cards */
+.player-cards, .dealer-cards {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
 .card {
-    display: inline-block;
+    width: 100px;
+    height: 150px;
+    background-color: #fff; /* White card */
+    border: 2px solid #FFA500; /* Orange border */
+    border-radius: 5px;
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Hidden Card */
+.card p {
+    font-size: 1.2em;
+    color: #333; /* Darker color for card text */
+}
+
+/* Game Over Section */
+.game-over {
+    margin-top: 20px;
     padding: 10px;
-    background-color: #fff;
-    color: black;
+    background-color: rgba(255, 99, 71, 0.9); /* Light tomato background */
     border-radius: 5px;
-    margin: 5px;
 }
 
-.controls button {
-    padding: 10px 20px;
-    margin: 10px;
+/* Controls */
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #FF4500; /* Orange red */
+    color: #fff;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 1.2em;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-.controls button:hover {
-    background-color: #555;
-    color: white;
+button:hover {
+    background-color: #FF6347; /* Tomato on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .card {
+        width: 80px; /* Smaller cards on mobile */
+        height: 120px;
+    }
+
+    h1 {
+        font-size: 2em; /* Adjust heading size */
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
 }
