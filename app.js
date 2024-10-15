@@ -25,6 +25,13 @@ let showDealerHand = false; // Used to toggle visibility of dealer's cards
 let gameOver = false; // Track if the game is over
 let gameResult = "";  // Store result message ("You win!", "Dealer wins!", etc.)
 
+app.set('view engine', 'ejs');
+
+// Define a route to render index.ejs
+app.get('/', (req, res) => {
+   res.render('index');
+});
+
 // Route for the Blackjack page (GET request to start or reset the game)
 app.get('/blackjack', async (req, res) => {
 try {

@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Creepster|Poppins:100,200,300,400,500,600,700,800,900');
+*
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+}
+.container 
+{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	background: #1a1a1a; /* Dark background */
+}
+.container #picture 
+{
+	width: 50%;
+	height: 100%;
+	transition: 0.5s;
+	background: #333; /* Darker background for the pictures */
+}
+.container #picture.one 
+{
+	background: url(1.png);
+	background-size: cover;
+	filter: grayscale(80%) brightness(50%); /* Darken and desaturate images for a spooky look */
+}
+.container #picture.two 
+{
+	background: url(2.png);
+	background-size: cover;
+	filter: grayscale(80%) brightness(50%);
+}
+.container #picture.four 
+{
+	background: url(3.png);
+	background-size: cover;
+	filter: grayscale(80%) brightness(50%);
+}
+.container ul 
+{
+	height: 100%;
+	padding: 40px 0;
+	background: #1a1a1a; /* Keep the background spooky */
+}
+.container ul li 
+{
+	position: relative;
+	list-style: none;
+	padding: 0 40px;
+}
+.container ul li a 
+{
+	display: block;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-size: 4em;
+	color: #ff6600; /* Bright orange text */
+	text-transform: uppercase;
+	font-weight: 700;
+	transition: 0.5s;
+	font-family: 'Creepster', cursive; /* Halloween-styled font */
+}
+.container ul li a:hover,
+.container ul li.active a
+{
+	color: #f1f1f1; /* White color when hovered */
+	transform: translateX(60px);
+}
+.container ul li::before 
+{
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) scaleX(0);
+	width: 50px;
+	height: 4px;
+	background: #ff6600; /* Bright orange underline effect */
+	transition: 0.5s;
+	transform-origin: left;
+}
+.container ul li:hover::before,
+.container ul li.active::before
+{
+	transform: translateY(-50%) scaleX(1);
+}
+
