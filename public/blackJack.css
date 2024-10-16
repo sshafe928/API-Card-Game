@@ -1,25 +1,195 @@
-/* CSS Reset to ensure consistent behavior across browsers */
+/* General Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    background-image: url('/11.jpeg'); /* Background image from 'public' folder */
-    background-size: cover; /* Cover ensures the image fills the whole screen */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-position: center; /* Centers the image */
-    font-family: 'Roboto', sans-serif;
-    padding: 20px;
-    overflow: hidden; /* Disables scrolling */
+html, body {
+    height: 100%;
+    overflow: hidden;
 }
 
-.game-image {
-    display: block; 
-    width: 30em; 
-    height: auto;
-    margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    bottom: -2em;
+body {
+    background: url('/11.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay for contrast */
+    z-index: -1;
+}
+
+/* Game Container */
+.game-container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Sections */
+.cards-section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Player and Dealer Cards Layout */
+.player-cards, .dealer-cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    padding: 10px;
+}
+
+/* Card Styles */
+.card {
+    width: 100px; /* Increased width */
+    height: 150px; /* Increased height */
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    color: black;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+    position: relative;
+    transform: translateY(-300px); /* Initial off-screen position */
+    opacity: 0;
+    animation: drawCard 0.7s forwards ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0); /* 3D effect */
+}
+
+/* Delayed animation for cards */
+.card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.card:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Card Drawing Animation */
+@keyframes drawCard {
+    from {
+        transform: translateY(-300px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Game Over Section */
+.game-over {
+    margin-top: 30px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.game-over h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffcc00;
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Controls (Hit/Stand buttons) */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #ff5722;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #e64a19;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: scale(1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
+    .game-container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .card {
+        width: 80px;
+        height: 120px;
+        font-size: 1.2em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
 }
