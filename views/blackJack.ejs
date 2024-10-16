@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
-    <link rel="stylesheet" href="/blackJack.css"> <!-- Note: No 'public/' in the path -->
+    <link rel="stylesheet" href="/blackJack.css"> <!-- Ensure this path is correct in your project -->
 </head>
 <body>
     <div class="game-container">
         <h1>Blackjack Game</h1>
         
+        <!-- Game Status (Wins and Losses) -->
         <div class="game-status">
             <p><strong>Wins:</strong> <%= wins %></p>
             <p><strong>Losses:</strong> <%= losses %></p>
         </div>
 
+        <!-- Player Cards Section -->
         <div class="cards-section">
             <h2>Your Hand</h2>
             <div class="player-cards">
@@ -27,6 +29,7 @@
             <p><strong>Your Score:</strong> <%= playerScore %></p>
         </div>
 
+        <!-- Dealer Cards Section -->
         <div class="cards-section">
             <h2>Dealer's Hand</h2>
             <div class="dealer-cards">
@@ -46,14 +49,16 @@
             <% } %>
         </div>
 
-        <% if (gameOver) { %> <!-- Check if the game is over -->
+        <!-- Game Over Section (if game is finished) -->
+        <% if (gameOver) { %>
             <div class="game-over">
-                <h2><%= gameResult %></h2> <!-- Display win/lose message -->
-                <form action="/blackjack/reset" method="post"> <!-- Reset game -->
+                <h2><%= gameResult %></h2> <!-- Win or Lose message -->
+                <form action="/blackjack/reset" method="post">
                     <button type="submit">Play Again</button>
                 </form>
             </div>
-        <% } else { %> <!-- If the game is still ongoing -->
+        <% } else { %> <!-- If game is ongoing -->
+            <!-- Hit and Stand Controls -->
             <div class="controls">
                 <form action="/blackjack" method="post">
                     <button type="submit" name="action" value="hit">Hit</button>
@@ -62,6 +67,5 @@
             </div>
         <% } %>
     </div>
-    <img src="/13-removebg-preview.png" alt="Description of the image" class="game-image">
 </body>
 </html>
