@@ -1,4 +1,4 @@
-const deckService = require('./deckOfCardsService');
+const deckService = require('../deckOfCardsService');
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
