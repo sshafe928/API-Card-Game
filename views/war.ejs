@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>War Game</title>
+    <link rel="stylesheet" href="/public/style.css"> <!-- Adjust if needed -->
+</head>
+<body>
+    <h1>War Card Game</h1>
+    <div id="game-container">
+        <div class="player-section">
+            <h2>Player 1</h2>
+            <div id="player-cards" class="card-display"></div>
+            <p>Cards left: <span id="player1-count"></span></p>
+        </div>
+        <div class="player-section">
+            <h2>Player 2</h2>
+            <div id="dealer-cards" class="card-display"></div>
+            <p>Cards left: <span id="player2-count"></span></p>
+        </div>
+    </div>
+    <button id="next-turn-btn">Next Turn</button>
+    <button id="play-again-btn" style="display:none;">Play Again</button>
+    <div id="winner-message"></div>
+
+    <script>
+        // Parse the JSON strings to get the player hands
+        const player1 = JSON.parse('<%- player1 %>');
+        const player2 = JSON.parse('<%- player2 %>');
+    </script>
+    <script src="/war.js"></script>
+</body>
+</html>

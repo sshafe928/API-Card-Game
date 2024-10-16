@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser'); // To handle form submissions
-const { createBlackjackDeck, drawCards } = require('./deckOfCardsService');
+const deckService = require('./deckOfCardsService');
 
 const app = express();
 
@@ -191,6 +191,29 @@ while (aceCount > 0 && total > 21) {
 
 return total;
 }
+
+
+
+app.get('/war', async (req, res) => {
+   try {
+      const deck = await deckService.shuffleDeck();
+      const deckId = deck.deck_id;
+      const { player1, player2 } = await deckService.splitDeckForWar(deckId);
+      
+      // Stringify the player hands
+      const player1JSON = JSON.stringify(player1);
+      const player2JSON = JSON.stringify(player2);
+
+      res.render('war', { 
+         player1: player1JSON,
+         player2: player2JSON
+      });
+   } catch (error) {
+      console.error('Error setting up the game:', error);
+      res.status(500).send('Internal Server Error');
+   }
+});
+
 
 // Start the server
 const port = process.env.PORT || 3000;
