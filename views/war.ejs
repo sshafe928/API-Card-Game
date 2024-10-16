@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War Game</title>
+    <link rel="stylesheet" type="text/css" href="../public/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>War Game</h1>
+
+        <div class="cards-section">
+            <h2>Your Hand</h2>
+            <div class="player-cards" id="player-cards">
+                <!-- Player 1's cards will be displayed here -->
+            </div>
+        </div>
+
+        <div class="cards-section">
+            <h2>Dealer's Hand</h2>
+            <div class="dealer-cards" id="dealer-cards">
+                <!-- Player 2's cards will be displayed here -->
+            </div>
+        </div>
+
+        <button id="next-turn-btn" style="display: none;">Next Turn</button>
+
+        <div id="winner-message" style="display: none;"></div>
+        <button id="play-again-btn" style="display: none;">Play Again</button>
+
+    </div>
+
+    <script src="../war.js"></script>
+</body>
+</html>

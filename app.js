@@ -192,6 +192,19 @@ while (aceCount > 0 && total > 21) {
 return total;
 }
 
+
+
+
+app.get('/war', (req, res) => {
+   res.render('war', { gameOver: false, gameResult: '' }); 
+});
+
+app.post('/war/reset', (req, res) => {
+   // Logic to reset the game state goes here
+
+   res.redirect('/war');
+});
+
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
