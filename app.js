@@ -2,6 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser'); // To handle form submissions
 const deckService = require('./deckOfCardsService');
+const { createBlackjackDeck, drawCards } = require('./deckOfCardsService');
+
 
 const app = express();
 
