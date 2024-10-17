@@ -3,30 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>War Game</title>
-    <link rel="stylesheet" href="/public/style.css"> <!-- Adjust if needed -->
+    <link rel="stylesheet" href="/war.css">
 </head>
 <body>
     <h1>War Card Game</h1>
     <div id="game-container">
         <div class="player-section">
-            <h2>Player 1</h2>
+            <h2>Player 1</h2> <!-- Player 1's Name -->
             <div id="player-cards" class="card-display"></div>
             <p>Cards left: <span id="player1-count"></span></p>
         </div>
         <div class="player-section">
-            <h2>Player 2</h2>
+            <h2>CPU</h2> <!-- Player 2's Name -->
             <div id="dealer-cards" class="card-display"></div>
             <p>Cards left: <span id="player2-count"></span></p>
-        </div>
+        </div>        
     </div>
     <button id="next-turn-btn">Next Turn</button>
     <button id="play-again-btn" style="display:none;">Play Again</button>
-    <div id="winner-message"></div>
+    <div id="winner-message" style="font-size: 2em; margin-top: 20px;"></div>
 
     <script>
-        // Parse the JSON strings to get the player hands
         const player1 = JSON.parse('<%- player1 %>');
         const player2 = JSON.parse('<%- player2 %>');
+
+        const drawCardSound = new Audio('/path/to/draw-card.mp3');
+        const victorySound = new Audio('/path/to/victory.mp3');
+
+        function playSound(sound) {
+            sound.currentTime = 0;
+            sound.play();
+        }
+
+        document.getElementById('next-turn-btn').addEventListener('click', function() {
+            playSound(drawCardSound);
+        });
+
+        function showWinner(winner) {
+            document.getElementById('winner-message').textContent = winner + " wins!";
+            playSound(victorySound);
+        }
     </script>
     <script src="/war.js"></script>
 </body>

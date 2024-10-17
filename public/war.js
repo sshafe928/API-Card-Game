@@ -40,6 +40,7 @@ const handleWar = (player1, player2, extracard1, extracard2) => {
         const card1 = player1WarCards[2];
         const card2 = player2WarCards[2];
 
+        renderCards(card1, card2)
         const battle = compareCards(card1, card2);
 
         if (battle === 1) {
@@ -134,6 +135,23 @@ const playWar = async () => {
     updateCardCounts();
     await playTurn(); // Start the first turn
 };
+
+// Inside your existing war.js file
+
+// Example function to determine the winner of the round
+function determineWinner(player1Card, player2Card) {
+    // Replace with your logic for determining the winner based on card values
+    if (player1Card.value > player2Card.value) {
+        highlightWinner('player1'); // Call function to highlight Player 1
+        return 'Player 1 wins this round!';
+    } else if (player1Card.value < player2Card.value) {
+        highlightWinner('player2'); // Call function to highlight Player 2
+        return 'Player 2 wins this round!';
+    } else {
+        return 'It\'s a tie!';
+    }
+}
+
 
 // Start the game when the page loads
 window.addEventListener('DOMContentLoaded', playWar);

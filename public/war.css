@@ -1,0 +1,109 @@
+/* General Body Styles */
+body {
+    background-image: url('/path/to/your/vegas-background.jpg'); /* Replace with a vibrant Vegas-themed background */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    animation: backgroundPulse 5s infinite; /* Pulsing background animation */
+}
+
+/* Main Heading Styles */
+h1 {
+    font-size: 4em; /* Large heading size */
+    color: gold; /* Gold color for luxury feel */
+    text-shadow: 0 0 20px rgba(255, 215, 0, 1), /* Bright gold glow */
+                 0 0 40px rgba(255, 215, 0, 0.8); /* Extra glow effect */
+    margin: 20px 0; /* Spacing above and below */
+    animation: flicker 1.5s infinite alternate; /* Flicker animation */
+}
+
+/* Player Section Styles */
+.player-section {
+    display: inline-block;
+    width: 45%;
+    margin: 20px;
+    padding: 20px;
+    border: 5px solid #ff1493; /* Neon pink border */
+    border-radius: 20px; /* Rounded corners */
+    background: rgba(0, 0, 0, 0.7); /* Dark translucent background */
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.8); /* Neon glow */
+    position: relative; /* Position relative for absolute children */
+    overflow: hidden; /* Hide overflow for flashy effects */
+}
+
+/* Card Display Styles */
+.card-display {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; /* Margin around card display */
+}
+
+/* Button Styles */
+#next-turn-btn, #play-again-btn {
+    padding: 15px 30px; /* Increased padding for larger buttons */
+    font-size: 1.5em; /* Button text size */
+    background-color: #ff4500; /* Bright orange button */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    box-shadow: 0 0 20px rgba(255, 69, 0, 1), /* Neon orange glow */
+                0 0 40px rgba(255, 69, 0, 0.8); /* Extra glow */
+}
+
+#next-turn-btn:hover, #play-again-btn:hover {
+    background-color: #cd3700; /* Darker orange on hover */
+    transform: scale(1.1); /* Slight scale effect on hover */
+    box-shadow: 0 0 30px rgba(255, 69, 0, 1), /* Intensified glow */
+                0 0 50px rgba(255, 69, 0, 0.8); /* Extra glow */
+}
+
+/* Winner Message Styles */
+#winner-message {
+    font-size: 2.5em; /* Size of the winner message */
+    margin-top: 20px; /* Spacing above */
+    color: #00ff00; /* Neon green */
+    text-shadow: 0 0 20px rgba(0, 255, 0, 1), /* Neon green glow */
+                 0 0 40px rgba(0, 255, 0, 0.8); /* Extra glow effect */
+}
+
+/* Glow and Size for Player Names */
+h2 {
+    font-size: 3.5em; /* Big size for player names */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 1), /* Gold glow for Player 1 */
+                 0 0 20px rgba(255, 215, 0, 0.8); /* Extra glow effect */
+}
+
+.player-section:nth-child(1) h2 {
+    color: gold; /* Bright gold color for Player 1 */
+}
+
+.player-section:nth-child(2) h2 {
+    font-size: 3.5em; /* Same size for consistency */
+    color: red; /* Bright red color for Player 2 */
+    text-shadow: 0 0 10px rgba(255, 0, 0, 1), /* Red glow for Player 2 */
+                 0 0 20px rgba(255, 0, 0, 0.8); /* Extra glow effect */
+}
+
+/* Animation Keyframes */
+@keyframes backgroundPulse {
+    0% { background-color: rgba(0, 0, 0, 0.9); }
+    50% { background-color: rgba(0, 0, 0, 1); }
+    100% { background-color: rgba(0, 0, 0, 0.9); }
+}
+
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Flexbox Adjustment for Centering */
+#game-container {
+    display: flex;
+    justify-content: space-around; /* Space between player sections */
+    align-items: center; /* Align items vertically */
+    margin: 20px 0; /* Spacing around the container */
+}

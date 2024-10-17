@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack Game</title>
     <link rel="stylesheet" href="/blackJack.css"> <!-- Ensure this path is correct in your project -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
+    <audio id="game-audio" loop>
+        <source src="/path_to_your_audio_file.mp3" type="audio/mpeg"> <!-- Change to your audio file path -->
+        Your browser does not support the audio element.
+    </audio>
+    
+    <img src="/IMG_7598-removebg-preview (2).png" alt="ghost" class="ghost">
     <div class="game-container">
-        <h1>Blackjack Game</h1>
-        
+        <h1>Shuffle Me This BlackJack</h1>
+
         <!-- Game Status (Wins and Losses) -->
         <div class="game-status">
             <p><strong>Wins:</strong> <%= wins %></p>
@@ -18,32 +25,34 @@
 
         <!-- Player Cards Section -->
         <div class="cards-section">
-            <h2>Your Hand</h2>
-            <div class="player-cards">
+            <h2 class="left-text">Your Hand</h2>
+            <div id="player-cards" class="card-display">
                 <% playerHand.forEach(card => { %>
                     <div class="card">
-                        <p><%= card.value %> of <%= card.suit %></p>
+                        <img src="<%= card.image %>" 
+                            alt="<%= card.value %> of <%= card.suit %>">
                     </div>
                 <% }); %>
             </div>
-            <p><strong>Your Score:</strong> <%= playerScore %></p>
+            <p class="left-text"><strong>Your Score:</strong> <%= playerScore %></p>
         </div>
 
         <!-- Dealer Cards Section -->
         <div class="cards-section">
-            <h2>Dealer's Hand</h2>
-            <div class="dealer-cards">
+            <h2 class="left-text">Dealer's Hand</h2>
+            <div id="dealer-cards" class="card-display">
                 <% dealerHand.forEach((card, index) => { %>
                     <div class="card">
-                        <p>
-                            <%= (index === 0 || showDealerHand) 
-                                ? `${card.value} of ${card.suit}` 
-                                : 'Hidden' %>
-                        </p>
+                        <% if (index === 0 || showDealerHand) { %>
+                            <img src="<%= card.image %>" 
+                                alt="<%= card.value %> of <%= card.suit %>">
+                        <% } else { %>
+                            <img src="/cards/back_of_card.png" alt="Hidden Card" class="hidden">
+                        <% } %>
                     </div>
                 <% }); %>
             </div>
-            <p><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
+            <p class="left-text"><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
             <% if (showDealerHand) { %>
                 <p><strong>Dealer's Score:</strong> <%= dealerScore %></p>
             <% } %>
@@ -57,7 +66,7 @@
                     <button type="submit">Play Again</button>
                 </form>
             </div>
-        <% } else { %> <!-- If game is ongoing -->
+        <% } else { %>
             <!-- Hit and Stand Controls -->
             <div class="controls">
                 <form action="/blackjack" method="post">
@@ -67,5 +76,33 @@
             </div>
         <% } %>
     </div>
+
+    <script>
+        // Select the ghost element
+        const ghost = document.querySelector('.ghost');
+        let fadeOutTimer; // Timer for fade out
+
+        // Start playing the audio
+        const audio = document.getElementById('game-audio');
+        audio.play().catch(error => {
+            console.log('Audio play failed: ', error);
+        });
+
+        // Mouse enter event
+        ghost.addEventListener('mouseenter', () => {
+            // Set a timeout to fade out the ghost after 2 seconds
+            fadeOutTimer = setTimeout(() => {
+                ghost.classList.add('fade-out');
+            }, 1000);
+        });
+
+        // Mouse leave event
+        ghost.addEventListener('mouseleave', () => {
+            // Clear the fade out timer if the mouse leaves before the timeout
+            clearTimeout(fadeOutTimer);
+            // Immediately make the ghost reappear
+            ghost.classList.remove('fade-out');
+        });
+    </script>
 </body>
 </html>

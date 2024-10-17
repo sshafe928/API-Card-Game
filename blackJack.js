@@ -42,12 +42,26 @@ function calculateHandValue(hand) {
     return total;
 }
 
+// Assuming playerCardsDisplay and dealerCardsDisplay are elements in your HTML
+const playerCardsDisplay = document.getElementById('playerCardsDisplay');
+const dealerCardsDisplay = document.getElementById('dealerCardsDisplay');
+
+function renderCards(playerHand, dealerHand) {
+    playerCardsDisplay.innerHTML = playerHand.map(card => 
+        `<img src="${card.image}" alt="${card.value} of ${card.suit}">`
+    ).join('');
+
+    dealerCardsDisplay.innerHTML = dealerHand.map(card => 
+        `<img src="${card.image}" alt="${card.value} of ${card.suit}">`
+    ).join('');
+}
+
 function playBlackjack() {
     shuffleDeck(6).then((blackjackDeck) => {
         drawCards(blackjackDeck.deck_id, 2).then((playerHand) => {
             drawCards(blackjackDeck.deck_id, 1).then((dealerHand) => {
-                console.log('Your cards:', playerHand.map(card => `${card.value} of ${card.suit}`));
-
+                renderCards(playerHand, dealerHand); // Render initial hands
+                
                 let playerScore = calculateHandValue(playerHand);
                 let dealerScore = calculateHandValue(dealerHand);
 
@@ -63,8 +77,9 @@ function playBlackjack() {
                     drawCards(blackjackDeck.deck_id, 1).then((newCard) => {
                         playerHand.push(newCard[0]); // Add the new card to player's hand
                         playerScore = calculateHandValue(playerHand); // Recalculate player's score
-                        console.log('You drew:', `${newCard[0].value} of ${newCard[0].suit}`);
-                        console.log('Your cards:', playerHand.map(card => `${card.value} of ${card.suit}`));
+                        
+                        renderCards(playerHand, dealerHand); // Update the display
+
                         console.log('Your score:', playerScore);
 
                         if (playerScore > 21) {
@@ -87,18 +102,17 @@ function playBlackjack() {
 
                 function stand() {
                     console.log('You chose to stand.');
-                    console.log('Dealer reveals their hidden card:', `${dealerHand[0].value} of ${dealerHand[0].suit}`);
+                    dealerScore = calculateHandValue(dealerHand);
                     
                     const dealerTurn = () => {
-                        dealerScore = calculateHandValue(dealerHand);
                         console.log('Dealer\'s current score:', dealerScore);
                         
                         if (dealerScore < 17) {
                             drawCards(blackjackDeck.deck_id, 1).then((newCard) => {
                                 dealerHand.push(newCard[0]); // Add the new card to dealer's hand
-                                console.log('Dealer draws:', `${newCard[0].value} of ${newCard[0].suit}`);
                                 dealerScore = calculateHandValue(dealerHand);
-                                console.log('Dealer\'s score:', dealerScore);
+
+                                renderCards(playerHand, dealerHand); // Update the display
 
                                 if (dealerScore > 21) {
                                     console.log('Dealer BUSTS! You win!');
@@ -161,7 +175,6 @@ function playBlackjack() {
                     });
                 }
 
-                // Prompt to ask if player wants to play again
                 function playAgainPrompt() {
                     rl.question(`Do you want to play again? (y/n) Wins: ${wins}, Losses: ${losses} `, (answer) => {
                         if (answer.trim().toLowerCase() === 'y') {
@@ -174,7 +187,6 @@ function playBlackjack() {
                     });
                 }
 
-                // Initial prompt without choosing Ace value manually
                 promptPlayer();
             }).catch(err => {
                 console.error('Error dealing dealer\'s initial card:', err);

@@ -1,199 +1,262 @@
-/* General Styles */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Disable Scroll */
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrolling */
 }
 
+/* Body and Font */
 body {
-    background: url('/11.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Arial', sans-serif;
+    background: url(/11.jpeg) no-repeat center center fixed; /* Background covers the entire body */
+    background-size: cover; /* Ensures the image covers the entire body */
+    color: #f9f9f9; /* Light text color */
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
-    align-items: center;
-    color: white;
-    position: relative;
-    z-index: 1;
-}
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7); /* Darker overlay for spookier vibe */
-    z-index: -1;
+    align-items: flex-start; /* Align container to the top */
+    padding-top: 20px; /* Add some space from the top */
+    height: 100vh;
+    filter: grayscale(50%); /* Apply a grey tone to the atmosphere */
+    overflow: hidden; /* Prevent scrolling */
 }
 
 /* Game Container */
 .game-container {
-    text-align: center;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark, spooky background */
+    background: url('/image_2024-10-16_144219374-removebg-preview.png') no-repeat center center; /* Center the background image */
+    background-size: cover; /* Make sure the image covers the entire container */
     border-radius: 15px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px); /* Frosted glass effect */
-    border: 3px solid orange; /* Halloween orange border */
+    padding: 20px;
+    max-width: 800px; /* Reduce the width to better fit the screen */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 85vh; /* Adjust the height */
+    margin: 0 auto; /* Center the container horizontally */
+    position: relative;
 }
 
+/* Title */
 h1 {
-    font-size: 3em;
+    text-align: center;
+    background: linear-gradient(90deg, #e74c3c, #f1c40f); /* Gradient background */
+    -webkit-background-clip: text; /* Clip the gradient to the text */
+    -webkit-text-fill-color: transparent; /* Make the text color transparent */
+    font-size: 3rem; /* Increase the font size */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 255, 255, 0.5); /* Layered shadows */
+    margin-top: -15px; /* Adjust the spacing */
+    position: relative;
+    animation: glow 1.5s infinite alternate; /* Add glow animation */
+}
+
+/* Game Status (Wins/Losses) */
+.game-status {
+    text-align: left;
     margin-bottom: 20px;
-    letter-spacing: 2px;
-    text-shadow: 3px 3px 5px rgba(255, 69, 0, 0.9); /* Orange glowing text */
-    color: #ffcc00; /* Gold text to match Halloween theme */
+    margin-left: 60px; /* Adjust left margin */
+    color: #ecf0f1; /* Light grey for text */
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 255, 255, 0.3); /* Subtle shadows */
+    animation: fade-in 1s ease-in; /* Add fade-in animation */
 }
 
-/* Card Sections */
-.cards-section {
-    margin-bottom: 30px;
+/* Glow Animation */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        text-shadow: 0 0 20px rgba(255, 255, 0, 1), 0 0 30px rgba(255, 204, 0, 1);
+    }
 }
 
-h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-    text-shadow: 3px 3px 5px rgba(255, 69, 0, 0.9); /* Similar glow effect */
-    color: #ffcc00;
-}
-
-/* Player and Dealer Cards Layout */
-.player-cards, .dealer-cards {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    position: relative;
-    padding: 10px;
-}
-
-/* Card Styles */
-.card {
-    width: 100px;  /* Slightly bigger */
-    height: 150px; /* Increased size */
-    background-color: #fff;
-    border-radius: 10px;
-    border: 2px solid #ff4500; /* Halloween orange border for cards */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.8em; /* Slightly larger font for cards */
-    color: black;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6); /* Enhanced shadow for spooky vibe */
-    position: relative;
-    transform: translateY(-300px); /* Initial off-screen position */
-    opacity: 0;
-    animation: drawCard 0.7s forwards ease-in-out;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: linear-gradient(145deg, #e0e0e0, #f0f0f0); /* 3D card effect */
-}
-
-.card:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.8); /* Darker shadow */
-}
-
-/* Delayed animation for cards to draw one after the other */
-.card:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.card:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-/* Card Drawing Animation */
-@keyframes drawCard {
+/* Fade-in Animation */
+@keyframes fade-in {
     from {
-        transform: translateY(-300px); /* Start from off-screen */
-        opacity: 0;
+        opacity: 0; /* Start invisible */
     }
     to {
-        transform: translateY(0); /* End at final position */
-        opacity: 1;
+        opacity: 1; /* Fade in to visible */
     }
+}
+
+
+/* Player and Dealer Cards */
+.card-display {
+    display: flex;
+    justify-content: center; /* Center the cards */
+    gap: 10px; /* Add spacing between cards */
+    margin-top: 10px;
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #34495e;
+    border-radius: 8px;
+    width: 100px; /* Reduced width */
+    height: 140px; /* Reduced height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    font-size: 0.9rem; /* Adjusted font size */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    transform: translate(180px, -75px);
+}
+
+
+/* Specific styles for the hidden card */
+.card img {
+    max-width: 100%; /* Limit image width */
+    max-height: 100%; /* Limit image height */
+}
+
+/* Hidden card */
+.hidden {
+    transform: rotateY(180deg); /* Flip the card */
 }
 
 /* Game Over Section */
 .game-over {
-    margin-top: 30px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
-    border: 2px solid orange; /* Halloween border */
+    color: #3cf200;
+    font-size: 2rem;
+    margin-bottom: 60px;
 }
 
-.game-over h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    color: #ffcc00;
-    text-shadow: 3px 3px 6px rgba(255, 69, 0, 0.9); /* Halloween glow */
-}
-
-/* Controls (Hit/Stand buttons) */
+/* Controls */
 .controls {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    margin-top: auto;
 }
 
 button {
-    padding: 15px 30px;
-    background-color: #ff5722;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-size: 1.2em;
+    background: linear-gradient(135deg, #8e44ad, #e67e22); /* Gradient background */
+    color: #fff; /* Keep text color white */
+    border: none; /* Remove border for a cleaner look */
+    border-radius: 10px; /* Rounded corners */
+    padding: 12px 25px; /* Increased padding for a better feel */
+    font-size: 1.2rem; /* Slightly reduced font size */
     cursor: pointer;
-    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Enhanced shadow for depth */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
 }
 
+/* Hover Effect */
 button:hover {
-    background-color: #ff4500; /* Darker orange for hover */
-    transform: scale(1.05);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #e67e22, #8e44ad); /* Inverted gradient on hover */
+    transform: translateY(-5px); /* Slightly lift the button */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7); /* Deeper shadow on hover */
 }
 
+/* Active Effect */
 button:active {
-    transform: scale(1);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px); /* Slightly push down on click */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Return to original shadow */
 }
 
-/* Responsive Layout */
-@media screen and (max-width: 768px) {
+
+/* Ghost Character */
+/* Ghost Character */
+.ghost {
+    position: absolute;
+    left: 20px; /* Adjusted position to avoid it going too far left */
+    top: 40%; /* Initial height */
+    transform: translateY(-50%); /* Center the ghost vertically */
+    opacity: 1; /* Start fully visible */
+    transition: opacity 1s ease; /* Smooth transition for opacity */
+    animation: float 3s ease-in-out infinite; /* Float animation */
+}
+
+/* Floating Animation for Ghost */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(-50%); /* Centered */
+    }
+    50% {
+        transform: translateY(-60%); /* Moves up */
+    }
+}
+        /* Ghost Character */
+        .ghost {
+            position: absolute;
+            left: 20px; /* Adjusted position to avoid it going too far left */
+            top: 50%; /* Adjust this value to lower the ghost slightly */
+            transform: translateY(-50%); /* Center the ghost vertically */
+            opacity: 1; /* Start fully visible */
+            transition: opacity 1s ease; /* Smooth transition for opacity */
+            animation: float 3s ease-in-out infinite; /* Float animation */
+        }
+
+        /* Floating Animation for Ghost */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(-50%); /* Centered */
+            }
+            50% {
+                transform: translateY(-60%); /* Moves up */
+            }
+        }
+
+        /* Fade In */
+        .fade-in {
+            opacity: 1; /* Fully visible */
+        }
+
+        /* Fade Out */
+        .fade-out {
+            opacity: 0; /* Fully invisible */
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% {
+                transform: translateY(-50%) translateX(0); /* Original position */
+            }
+            20% {
+                transform: translateY(-50%) translateX(-5px); /* Move slightly left */
+            }
+            40% {
+                transform: translateY(-50%) translateX(5px); /* Move slightly right */
+            }
+            60% {
+                transform: translateY(-50%) translateX(-3px); /* Move slightly left */
+            }
+            80% {
+                transform: translateY(-50%) translateX(3px); /* Move slightly right */
+            }
+            100% {
+                transform: translateY(-50%) translateX(0); /* Back to original position */
+            }
+        }
+
+        /* Hover Effect */
+        .ghost:hover {
+            animation: glitch 0.5s infinite; /* Apply glitch animation on hover */
+        }
+
+
+/* Mobile Friendly */
+@media (max-width: 768px) {
     .game-container {
-        width: 95%;
-        padding: 10px;
+        max-width: 90%;
     }
 
-    h1 {
-        font-size: 2.5em;
+    .game-status {
+        margin-left: 30px;
     }
 
-    h2 {
-        font-size: 1.5em;
-    }
-
-    .card {
-        width: 80px;
-        height: 120px;
-        font-size: 1.4em;
-    }
-
-    button {
-        font-size: 1em;
-        padding: 10px 20px;
+    .ghost {
+        left: 10px;
     }
 }
