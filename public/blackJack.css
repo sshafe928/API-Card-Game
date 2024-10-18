@@ -168,31 +168,10 @@ button:active {
 }
 
 
-/* Ghost Character */
-/* Ghost Character */
-.ghost {
-    position: relative;
-    left: 400px; /* Adjusted position to avoid it going too far left */
-    top: 40%; /* Initial height */
-    transform: translateY(-60%); /* Center the ghost vertically */
-    opacity: 1; /* Start fully visible */
-    transition: opacity 1s ease; /* Smooth transition for opacity */
-    animation: float 3s ease-in-out infinite; /* Float animation */
-}
-
-/* Floating Animation for Ghost */
-@keyframes float {
-    0%, 100% {
-        transform: translateY(-50%); /* Centered */
-    }
-    50% {
-        transform: translateY(-60%); /* Moves up */
-    }
-}
         /* Ghost Character */
         .ghost {
-            position: absolute;
-            left: -30px; /* Adjusted position to avoid it going too far left */
+            position: relative;
+            left: 100px; /* Adjusted position to avoid it going too far left */
             top: 50%; /* Adjust this value to lower the ghost slightly */
             transform: translateY(-50%); /* Center the ghost vertically */
             opacity: 1; /* Start fully visible */
@@ -268,14 +247,14 @@ button:active {
     color: gold;
     position: relative;
     bottom: 305px;
-    left: 35px;
+    left: 75px;
 }
 
 #score2{
     color: rgb(176, 63, 63);
     position: relative;
     bottom: 155px;
-    left: 35px;
+    left: 75px;
 }
 
 /* Card Slide Down Animation */
@@ -326,4 +305,9 @@ button:active {
     100% {
         transform: rotateY(180deg);  /* End flipped */
     }
+}
+
+.left-text{
+    position: relative;
+    left: 70px;
 }
