@@ -33,7 +33,7 @@ body {
     background-size: cover; /* Make sure the image covers the entire container */
     border-radius: 15px;
     padding: 20px;
-    max-width: 800px; /* Reduce the width to better fit the screen */
+    max-width: 1000px; /* Reduce the width to better fit the screen */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@ h1 {
 .game-status {
     text-align: left;
     margin-bottom: 20px;
-    margin-left: 60px; /* Adjust left margin */
+    margin-left: 80px; /* Adjust left margin */
     color: #ecf0f1; /* Light grey for text */
     font-size: 1.5rem; /* Increase font size */
     font-weight: bold; /* Make the text bold */
@@ -94,10 +94,11 @@ h1 {
     display: flex;
     justify-content: center; /* Center the cards */
     gap: 10px; /* Add spacing between cards */
-    margin-top: 10px;
+    margin-top: -10px;
 }
 
 .card {
+    position: relative;
     background-color: #f9f9f9;
     border: 1px solid #34495e;
     border-radius: 8px;
@@ -106,10 +107,11 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
+    margin: 3px;
     font-size: 0.9rem; /* Adjusted font size */
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-    transform: translate(180px, -75px);
+    bottom: 55px;
+    left: 180px;
 }
 
 
@@ -169,10 +171,10 @@ button:active {
 /* Ghost Character */
 /* Ghost Character */
 .ghost {
-    position: absolute;
-    left: 20px; /* Adjusted position to avoid it going too far left */
+    position: relative;
+    left: 400px; /* Adjusted position to avoid it going too far left */
     top: 40%; /* Initial height */
-    transform: translateY(-50%); /* Center the ghost vertically */
+    transform: translateY(-60%); /* Center the ghost vertically */
     opacity: 1; /* Start fully visible */
     transition: opacity 1s ease; /* Smooth transition for opacity */
     animation: float 3s ease-in-out infinite; /* Float animation */
@@ -190,7 +192,7 @@ button:active {
         /* Ghost Character */
         .ghost {
             position: absolute;
-            left: 20px; /* Adjusted position to avoid it going too far left */
+            left: -30px; /* Adjusted position to avoid it going too far left */
             top: 50%; /* Adjust this value to lower the ghost slightly */
             transform: translateY(-50%); /* Center the ghost vertically */
             opacity: 1; /* Start fully visible */
@@ -258,5 +260,70 @@ button:active {
 
     .ghost {
         left: 10px;
+    }
+}
+
+#score{
+    display: flex;
+    color: gold;
+    position: relative;
+    bottom: 305px;
+    left: 35px;
+}
+
+#score2{
+    color: rgb(176, 63, 63);
+    position: relative;
+    bottom: 155px;
+    left: 35px;
+}
+
+/* Card Slide Down Animation */
+@keyframes slide-down {
+    0% {
+        opacity: 0;  /* Start invisible */
+        transform: translateY(-100px);  /* Start above the container */
+    }
+    100% {
+        opacity: 1;  /* Fully visible */
+        transform: translateY(0);  /* End at the original position */
+    }
+}
+
+/* Apply animation to cards */
+.card {
+    animation: slide-down 0.8s ease-out;  /* Slide down over 0.8s with easing */
+}
+
+/* Delay for each card in a staggered way (optional) */
+.card:nth-child(1) {
+    animation-delay: 0.1s;  /* First card delay */
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.2s;  /* Second card delay */
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.3s;  /* Third card delay */
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.4s;  /* Fourth card delay */
+}
+
+/* Hidden card */
+.hidden {
+    transform: rotateY(180deg); /* Flip the card */
+    animation: slide-down 0.8s ease-out, flip 0.8s ease-out 0.8s;  /* Add flip after slide down */
+}
+
+/* Optional: Flip Animation */
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);  /* Start unflipped */
+    }
+    100% {
+        transform: rotateY(180deg);  /* End flipped */
     }
 }

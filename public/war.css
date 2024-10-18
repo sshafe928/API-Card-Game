@@ -1,10 +1,10 @@
 /* General Body Styles */
 body {
-    background-image: url('/path/to/your/vegas-background.jpg'); /* Replace with a vibrant Vegas-themed background */
+    background-image: url('/84.jpg'); /* Replace with a spooky Halloween-themed background */
     background-size: cover; /* Cover the entire background */
     background-position: center; /* Center the background image */
     color: #fff;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Creepster', cursive; /* Creepy Halloween font */
     text-align: center;
     animation: backgroundPulse 5s infinite; /* Pulsing background animation */
 }
@@ -12,11 +12,11 @@ body {
 /* Main Heading Styles */
 h1 {
     font-size: 4em; /* Large heading size */
-    color: gold; /* Gold color for luxury feel */
-    text-shadow: 0 0 20px rgba(255, 215, 0, 1), /* Bright gold glow */
-                 0 0 40px rgba(255, 215, 0, 0.8); /* Extra glow effect */
+    color: #ffa500; /* Bright pumpkin orange */
+    text-shadow: 0 0 30px rgba(255, 69, 0, 1), /* Intense orange glow */
+                 0 0 50px rgba(255, 69, 0, 0.8); /* Extra glow effect */
     margin: 20px 0; /* Spacing above and below */
-    animation: flicker 1.5s infinite alternate; /* Flicker animation */
+    animation: flicker 1.2s infinite alternate; /* Faster flicker animation for spooky effect */
 }
 
 /* Player Section Styles */
@@ -25,12 +25,12 @@ h1 {
     width: 45%;
     margin: 20px;
     padding: 20px;
-    border: 5px solid #ff1493; /* Neon pink border */
+    border: 5px solid #8b008b; /* Dark purple neon border */
     border-radius: 20px; /* Rounded corners */
     background: rgba(0, 0, 0, 0.7); /* Dark translucent background */
-    box-shadow: 0 0 30px rgba(255, 20, 147, 0.8); /* Neon glow */
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); /* Eerie purple glow */
     position: relative; /* Position relative for absolute children */
-    overflow: hidden; /* Hide overflow for flashy effects */
+    overflow: hidden; /* Hide overflow for spooky effects */
 }
 
 /* Card Display Styles */
@@ -49,7 +49,7 @@ h1 {
     border-radius: 20px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
-    box-shadow: 0 0 20px rgba(255, 69, 0, 1), /* Neon orange glow */
+    box-shadow: 0 0 20px rgba(255, 140, 0, 1), /* Neon orange glow */
                 0 0 40px rgba(255, 69, 0, 0.8); /* Extra glow */
 }
 
@@ -64,39 +64,39 @@ h1 {
 #winner-message {
     font-size: 2.5em; /* Size of the winner message */
     margin-top: 20px; /* Spacing above */
-    color: #00ff00; /* Neon green */
-    text-shadow: 0 0 20px rgba(0, 255, 0, 1), /* Neon green glow */
-                 0 0 40px rgba(0, 255, 0, 0.8); /* Extra glow effect */
+    color: #32cd32; /* Neon green for spooky feel */
+    text-shadow: 0 0 20px rgba(50, 205, 50, 1), /* Creepy green glow */
+                 0 0 40px rgba(50, 205, 50, 0.8); /* Extra glow effect */
 }
 
 /* Glow and Size for Player Names */
 h2 {
     font-size: 3.5em; /* Big size for player names */
-    text-shadow: 0 0 10px rgba(255, 215, 0, 1), /* Gold glow for Player 1 */
-                 0 0 20px rgba(255, 215, 0, 0.8); /* Extra glow effect */
+    text-shadow: 0 0 10px rgba(255, 165, 0, 1), /* Fiery orange glow for Player 1 */
+                 0 0 20px rgba(255, 69, 0, 0.8); /* Extra glow effect */
 }
 
 .player-section:nth-child(1) h2 {
-    color: gold; /* Bright gold color for Player 1 */
+    color: #ffa500; /* Pumpkin orange for Player 1 */
 }
 
 .player-section:nth-child(2) h2 {
     font-size: 3.5em; /* Same size for consistency */
-    color: red; /* Bright red color for Player 2 */
-    text-shadow: 0 0 10px rgba(255, 0, 0, 1), /* Red glow for Player 2 */
+    color: #ff0000; /* Bright blood red for Player 2 */
+    text-shadow: 0 0 10px rgba(255, 0, 0, 1), /* Blood red glow for Player 2 */
                  0 0 20px rgba(255, 0, 0, 0.8); /* Extra glow effect */
 }
 
 /* Animation Keyframes */
 @keyframes backgroundPulse {
-    0% { background-color: rgba(0, 0, 0, 0.9); }
-    50% { background-color: rgba(0, 0, 0, 1); }
-    100% { background-color: rgba(0, 0, 0, 0.9); }
+    0% { background-color: rgba(0, 0, 0, 0.8); }
+    50% { background-color: rgba(0, 0, 0, 0.9); }
+    100% { background-color: rgba(0, 0, 0, 0.8); }
 }
 
 @keyframes flicker {
     0% { opacity: 1; }
-    50% { opacity: 0.7; }
+    40% { opacity: 0.5; }
     100% { opacity: 1; }
 }
 

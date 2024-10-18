@@ -28,13 +28,13 @@
 }
 .container #picture.two 
 {
-	background: url(2.png);
+	background: url(blackjack.png);
 	background-size: cover;
 	filter: grayscale(80%) brightness(50%);
 }
 .container #picture.four 
 {
-	background: url(3.png);
+	background: url(1.png);
 	background-size: cover;
 	filter: grayscale(80%) brightness(50%);
 }

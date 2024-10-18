@@ -34,6 +34,11 @@ app.get('/', (req, res) => {
    res.render('index');
 });
 
+app.get('/team', (req, res) => {
+   res.render('team');
+});
+
+
 // Route for the Blackjack page (GET request to start or reset the game)
 app.get('/blackjack', async (req, res) => {
 try {

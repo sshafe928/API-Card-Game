@@ -13,7 +13,7 @@
         Your browser does not support the audio element.
     </audio>
     
-    <img src="/IMG_7598-removebg-preview (2).png" alt="ghost" class="ghost">
+    <img src="/ghost1.png" alt="ghost" class="ghost">
     <div class="game-container">
         <h1>Shuffle Me This BlackJack</h1>
 
@@ -34,7 +34,6 @@
                     </div>
                 <% }); %>
             </div>
-            <p class="left-text"><strong>Your Score:</strong> <%= playerScore %></p>
         </div>
 
         <!-- Dealer Cards Section -->
@@ -52,11 +51,17 @@
                     </div>
                 <% }); %>
             </div>
-            <p class="left-text"><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
-            <% if (showDealerHand) { %>
-                <p><strong>Dealer's Score:</strong> <%= dealerScore %></p>
-            <% } %>
+            <div id="score">
+                <p  class="left-text"><strong>Your Score:</strong> <%= playerScore %></p>
+            </div>
+            <div id="score2">
+                <p class="left-text"><strong>Dealer shows:</strong> <%= dealerHand[0].value %> of <%= dealerHand[0].suit %></p>
+                <% if (showDealerHand) { %>
+                    <p><strong>Dealer's Score:</strong> <%= dealerScore %></p>
+                <% } %>
+            </div>
         </div>
+
 
         <!-- Game Over Section (if game is finished) -->
         <% if (gameOver) { %>
@@ -76,6 +81,7 @@
             </div>
         <% } %>
     </div>
+
 
     <script>
         // Select the ghost element
